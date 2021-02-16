@@ -50,4 +50,5 @@ class MainActivity : AppCompatActivity() {
 //        display the Tip
         binding.tipResult.text = getString(R.string.tip_amount,formattedTip)
     }
+//    logic branch
 }
