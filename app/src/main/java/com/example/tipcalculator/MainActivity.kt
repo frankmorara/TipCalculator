@@ -8,7 +8,7 @@ import kotlin.math.ceil
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.calculateButton.setOnClickListener { calculateTip() }
     }
-    fun calculateTip(){
+    private fun calculateTip(){
 //        Checks the UI and calculates the Tip
 //        Getting the text of the cost of service (chaining)
         val stringInputTextField = binding.costOfService.text.toString()
@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
 //        Getting the tip percentage
-        val selectedId = binding.tipOptions.checkedRadioButtonId
-        val tipPercentage = when(selectedId){
+        val tipPercentage = when(binding.tipOptions.checkedRadioButtonId){
             R.id.option_twenty_percent -> 0.20
             R.id.option_eighteen_percent -> 0.18
             else -> 0.15
@@ -37,15 +36,18 @@ class MainActivity : AppCompatActivity() {
 //        Calculate the tip and round it up
         var tip = tipPercentage * cost //used var instead of var because you may need to round up the value if the user selected that option ,so the value might change
 //        Checking whether the roundup switch is checked
-        val roundUp = binding.roundUpSwitch.isChecked
-        if (roundUp){
+        if (binding.roundUpSwitch.isChecked){
             tip = ceil(tip)
         }
 //    A number formatter to use to format numbers as currency
         NumberFormat.getCurrencyInstance()
+        displayTip(tip)
+
+
+    }
+    private fun displayTip(tip: Double){
         val formattedTip = NumberFormat.getCurrencyInstance().format(tip)
 //        display the Tip
         binding.tipResult.text = getString(R.string.tip_amount,formattedTip)
-
     }
 }
