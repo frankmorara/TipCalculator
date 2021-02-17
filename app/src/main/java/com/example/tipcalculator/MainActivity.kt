@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private fun calculateTip(){
 //        Checks the UI and calculates the Tip
 //        Getting the text of the cost of service (chaining)
-        val stringInputTextField = binding.costOfService.text.toString()
+        val stringInputTextField = binding.costOfServiceEditText.text.toString()
 //Converting text to a decimal number
         val cost = stringInputTextField.toDoubleOrNull()
         if (cost == null){
